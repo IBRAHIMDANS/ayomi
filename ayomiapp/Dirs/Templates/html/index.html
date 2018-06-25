@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="titre" > Bienvenue sur la page d'accueil </h1>
+<div id="testin">
+<h2> Se connecter </h2>
+
+{% if error %}
+<p><strong>nom d'utilisateur ou mot de passe incorrect.</strong></p>
+{% endif %}
+
+{% if user.is_authenticated %}
+Bravo, Vous êtes connecté, {{ user.username }}
+
+<form method="post" action="deconnexion">
+    {% csrf_token %}
+    <input type="submit" value="Se deconnecter" style="margin-top: 22px;"/>
+</form>
+{% else %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btnc" value="Se connecter" />
+</form>
+{% endif %}
+</div>
+{% endblock %}
